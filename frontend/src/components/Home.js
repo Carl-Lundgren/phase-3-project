@@ -3,36 +3,22 @@ import Restaurant from './Restaurant'
 
 export default class Home extends Component {
     state = {
-        pictures: [],
-        scrollLocation: 0
+        restaurants: [],
+        
     }
 
     componentDidMount(){
-        fetch('https://dog.ceo/api/breeds/image/random/4')
+        fetch('https://localhost:9292/restaurants')
         .then(response => response.json())
         .then(data => this.setState({
-            pictures: data.message
+            restaurants: data.message
         }))
-        window.addEventListener('scroll', this.handleScroll);
-    }
-
-    handleScroll = () => {
-        if (window.scrollY > this.state.scrollLocation+200){
-            this.setState({
-                scrollLocation: window.scrollY+100
-            })
-            fetch('https://dog.ceo/api/breeds/image/random/2')
-            .then(response => response.json())
-            .then(data => this.setState({
-                pictures: [...this.state.pictures, ...data.message]
-            }))
-        }
     }
 
     render() {
         return (
             <div>
-                {this.state.pictures.map((item) => <Dog pic={item}/>)}
+                {this.state.restaurants.map((item) => <Restaurant pic={item}/>)}
             </div>
         )
     }

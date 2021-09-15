@@ -23,7 +23,9 @@ class Application
       if @req.post?
 
       elsif @req.delete?
-
+        id = req.path.split("/reviews/").last
+        Review.find(id).delete
+        return json_response({:message => "Task deleted!"})
       else
 
       end
