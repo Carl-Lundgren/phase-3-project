@@ -7,6 +7,7 @@ export default class Restaurant extends Component {
         return (
             <div>
                 
+                {this.props.restaurant.review.map((item) => <Review review={item}/>)}
             </div>
         )
     }
