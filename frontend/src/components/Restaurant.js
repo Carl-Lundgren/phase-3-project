@@ -6,8 +6,8 @@ export default class Restaurant extends Component {
     render() {
         return (
             <div>
-                
-                {this.props.restaurant.review.map((item) => <Review review={item}/>)}
+                <link to="/restaurantInformation">{this.props.name}</link>
+                <h2>{this.props.location}</h2>
             </div>
         )
     }

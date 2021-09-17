@@ -18,7 +18,7 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                
+                {this.state.restaurants.map((item) => <Restaurant info={item}/>)}
             </div>
         )
     }

@@ -2,6 +2,7 @@ import React from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Home from './components/Home'
 import Restaurant from './components/Restaurant'
+import RestaurantDetails from './components/RestaurantDetails'
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
         <Nav/>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route exact path={`/${this.prop.restaurant.name}`} component={Restaurant}/>
+          <Route exact path="/restaurantInformation" component={RestaurantDetails}/>
         </Switch>
       </BrowserRouter>
     </div>
