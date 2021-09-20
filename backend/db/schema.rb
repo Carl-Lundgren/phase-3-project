@@ -10,15 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_26_220635) do
-
-  create_table "locations", force: :cascade do |t|
-    t.string "place"
-  end
+ActiveRecord::Schema.define(version: 2021_08_26_214829) do
 
   create_table "restaurants", force: :cascade do |t|
     t.string "name"
-    t.integer "location_id"
+    t.string "location"
   end
 
   create_table "reviews", force: :cascade do |t|

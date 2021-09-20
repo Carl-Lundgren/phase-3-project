@@ -7,23 +7,48 @@ export default class Restaurants extends Component {
     restaurants: [],
   };
 
+  runFetch= () => {fetch("http://localhost:9292/restaurants")
+  .then((response) => response.json())
+  .then((info) => this.setState({ restaurants: info }));}
+
   componentDidMount() {
-    fetch("http://localhost:9292/restaurants")
-      .then((response) => response.json())
-      .then((info) => this.setState({ restaurants: info }));
+    this.runFetch()
   }
+
+  componentDidUpdate(){
+    this.runFetch()
+    // fetch("http://localhost:9292/restaurants")
+    //   .then((resp) => resp.json())
+    //   .then((data) => {
+    //     if (data.length === this.state.restaurants.length) {
+    //       console.log(data.length);
+    //     } else {
+    //       this.setState({ restaurants: data });
+    //     }
+    //   });
+  };
+  
+  deleteButton = (e) =>{
+    fetch(`http://localhost:9292/reviews/${e.target.id}`,
+    {method: 'DELETE'})
+    .then(response => response.json())
+    .then(data =>this.setState({
+        restaurants: [...this.state.restaurants], data
+    }))
+}
   
   renderRestaurants() {
       return this.state.restaurants.map(
           ({ location, name, id, reviews }, ind) => (
               <div key={id}>
           <h2>{name}</h2>
-          <h3>{location.place}</h3>
+          <h3>{location}</h3>
           {reviews.map((data) => (
               <div>
               <h3>{data.score}⭐</h3>
               <h4>{data.text}</h4>
-              <DeleteReview id={data.id} />
+              {/* <DeleteReview id={data.id} /> */}
+              <button  id={data.id} onClick={this.deleteButton}>❌</button>
             </div>
           ))}
         </div>
@@ -31,9 +56,10 @@ export default class Restaurants extends Component {
       );
     }
 
-    addReview = (data) => {
-      this.setState({restaurants: this.state.restaurants.reviews.concat(data)})
-    }
+    addReview = (data) => {this.setState({
+        restaurants: [...this.state.restaurants], data
+    })}
+    
     
   render() {
     return <div>

@@ -7,10 +7,10 @@ class Application
     if  req.path.match(/restaurants/)
       if req.get?
         restaurants = Restaurant.all
-        restaurants_with_location = restaurants.map do |r| 
+        restaurants_with_reviews = restaurants.map do |r| 
           {id: r.id, name: r.name, location: r.location, reviews: r.reviews}
         end
-        return json_response(restaurants_with_location)
+        return json_response(restaurants_with_reviews)
       else
       
       end
