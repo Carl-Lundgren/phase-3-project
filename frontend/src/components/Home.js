@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import RestaurantDetails from './RestaurantDetails'
 
 
 export default class Home extends Component {
@@ -28,6 +29,7 @@ export default class Home extends Component {
         return (
             <div>              
                 {this.renderRestaurants()}
+                <RestaurantDetails data = {this.state}/>
             </div>
         )
     }

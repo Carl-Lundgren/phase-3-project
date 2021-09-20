@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Review from './Review'
 
+
 export default class RestaurantDetails extends Component {
 
     state = {
@@ -9,9 +10,10 @@ export default class RestaurantDetails extends Component {
         text: ""
     }
 
+
     addNewReview(e){
         e.preventDefault();
-        fetch(`https://localhost:9292/reviews` ,{method: 'POST',
+        fetch("https://localhost:9292/reviews" ,{method: 'POST',
             headers: 
             {
                 "Content-Type": "application/json",
@@ -24,27 +26,29 @@ export default class RestaurantDetails extends Component {
             })
         })
         .then(response => response.json())
-        .then(data => data)
+        .then(data => console.log(data))
     }
-
-    changeHandler(e){
-        this.setState({[e.target.name]: e.target.value})
-    }
+    
 
     render() {
         return (
             <div>
                 <form onSubmit={this.addNewReview}>
+                    <div id="score">
                     <label>
                         Star Rating:
-                        <input type="number" value={this.state.score} name="score" onChange={this.changeHandler}/>
+                        <input type="number" value={this.state.score} name="score" onChange={(e) =>  {this.setState({score: e.target.value})}}/>
                     </label>
+                    </div>
+                    <div id="text">
                     <label>
                         Write a Review:
-                        <input type="text" value={this.state.text} name="text" onChange={this.changeHandler}/>
+                        <input type="text" value={this.state.text} name="text" onChange={(e) =>  {this.setState({text: e.target.value})}}/>
                     </label>
+                    </div>
+                    <input type="submit" value="Submit" />
                 </form>
-                {this.props.restaurant.reviews.map((item) => <Review review={item}/>)}
+                {/* {this.props.restaurant.reviews.map((item) => <Review review={item}/>)} */}
             </div>
         )
     }
