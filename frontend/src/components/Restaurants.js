@@ -17,25 +17,7 @@ export default class Restaurants extends Component {
 
   componentDidUpdate(){
     this.runFetch()
-    // fetch("http://localhost:9292/restaurants")
-    //   .then((resp) => resp.json())
-    //   .then((data) => {
-    //     if (data.length === this.state.restaurants.length) {
-    //       console.log(data.length);
-    //     } else {
-    //       this.setState({ restaurants: data });
-    //     }
-    //   });
   };
-  
-  deleteButton = (e) =>{
-    fetch(`http://localhost:9292/reviews/${e.target.id}`,
-    {method: 'DELETE'})
-    .then(response => response.json())
-    .then(data =>this.setState({
-        restaurants: [...this.state.restaurants], data
-    }))
-}
   
   renderRestaurants() {
       return this.state.restaurants.map(
@@ -47,8 +29,7 @@ export default class Restaurants extends Component {
               <div>
               <h3>{data.score}⭐</h3>
               <h4>{data.text}</h4>
-              {/* <DeleteReview id={data.id} /> */}
-              <button  id={data.id} onClick={this.deleteButton}>❌</button>
+              <DeleteReview id={data.id} />
             </div>
           ))}
         </div>
