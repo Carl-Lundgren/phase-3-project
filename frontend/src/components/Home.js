@@ -1,24 +1,33 @@
 import React, { Component } from 'react'
-import Restaurant from './Restaurant'
+import { NavLink } from 'react-router-dom'
+
 
 export default class Home extends Component {
     state = {
         restaurants: [],
-        
     }
 
     componentDidMount(){
-        fetch('https://localhost:9292/restaurants')
+        fetch('http://localhost:9292/restaurants')
         .then(response => response.json())
-        .then(data => this.setState({
-            restaurants: data.message
-        }))
+        .then(info => this.setState({restaurants: info}))
+    }
+
+    renderRestaurants(){
+        return this.state.restaurants.map(({location, name, id}) => (
+            <div key={id}>
+                <NavLink to="/restaurantInformation">{name}</NavLink>
+                <h2>
+                    {location.place}
+                </h2>
+            </div>
+        ))
     }
 
     render() {
         return (
-            <div>
-                {this.state.restaurants.map((item) => <Restaurant info={item}/>)}
+            <div>              
+                {this.renderRestaurants()}
             </div>
         )
     }

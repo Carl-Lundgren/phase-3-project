@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 export default class Review extends Component {
 
+    fetch
+
     deleteButton(){fetch(`https://localhost:9292/reviews/${this.props.id}`,{method: 'DELETE'})
         .then(response => response.json())
         .then(data => data)
