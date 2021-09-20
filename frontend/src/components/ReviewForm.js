@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Review from './Review'
 
 
-export default class RestaurantDetails extends Component {
+
+export default class ReviewForm extends Component {
 
     state = {
         restaurant_id: "",
@@ -11,22 +11,28 @@ export default class RestaurantDetails extends Component {
     }
 
 
-    addNewReview(e){
+    addNewReview= (e) => {
         e.preventDefault();
-        fetch("https://localhost:9292/reviews" ,{method: 'POST',
-            headers: 
-            {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
+        fetch('http://localhost:9292/reviews', {
+            method: 'POST',
+            headers: {
+                'Content-type' : 'application/json',
+                'Accept' : 'application/json'
             },
             body: JSON.stringify({
-                score: this.state.score,
-                text: this.state.text,
-                restaurant_id: this.state.restaurant_id
+              restaurant_id: this.state.restaurant_id,
+              score: this.state.score,
+              text: this.state.text,
             })
         })
-        .then(response => response.json())
-        .then(data => console.log(data))
+          .then(response => response.json())
+          .then(data => this.props.addReview(data))
+          .catch(error => console.error(error))
+          this.setState({
+            restaurant_id: "",
+            score: "",
+            text: "",
+          })
     }
     
 
@@ -46,9 +52,14 @@ export default class RestaurantDetails extends Component {
                         <input type="text" value={this.state.text} name="text" onChange={(e) =>  {this.setState({text: e.target.value})}}/>
                     </label>
                     </div>
+                    <div id="id">
+                    <label>
+                        Restaurant ID:
+                        <input type="number" value={this.state.restaurant_id} name="id" onChange={(e) =>  {this.setState({restaurant_id: e.target.value})}}/>
+                    </label>
+                    </div>
                     <input type="submit" value="Submit" />
                 </form>
-                {/* {this.props.restaurant.reviews.map((item) => <Review review={item}/>)} */}
             </div>
         )
     }
