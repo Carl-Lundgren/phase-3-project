@@ -26,7 +26,7 @@ export default class Restaurants extends Component {
           <h2>{name}</h2>
           <h3>{location}</h3>
           {reviews.map((data) => (
-              <div>
+              <div style={{border: 'black solid 5px', margin:'5rem'}}>
               <h3>{data.score}⭐</h3>
               <h4>{data.text}</h4>
               <DeleteReview id={data.id} />
@@ -43,7 +43,7 @@ export default class Restaurants extends Component {
     
     
   render() {
-    return <div>
+    return <div style={{textAlign: "center"}}>
         <ReviewForm addReview={this.addReview}/>
         {this.renderRestaurants()}</div>;
   }
